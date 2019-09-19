@@ -3,9 +3,6 @@ const router = express.Router();
 const axios = require('axios')
 const userModel = require("../models/User")
 
-router.get("/", (req, res) => {
-  res.send("hello home")
-})
 
 
 //async function (req, res)
@@ -37,7 +34,7 @@ router.get("/user/signin/callback", async (req, res) => {
 
     accessToken = `token ${gitHubToken.access_token}`
     const { data: infoUser } = await axios.get("https://api.github.com/user", { headers: { Authorization: accessToken } })
-
+   
     const { data: repositories } = await axios.get(`${infoUser.repos_url}?per_page=3`, { headers: { 'Accept': 'application/json' } })
 
     for (let i = 0; i < repositories.length; i++) {
