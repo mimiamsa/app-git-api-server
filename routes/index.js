@@ -58,7 +58,7 @@ router.get("/user/signin/callback", async (req, res) => {
     const { data: organizations } = await axios.get("http://api.github.com/user/orgs", { headers: { Authorization: accessToken } })
 
     req.session.currentUser = { infoUser, repositories, organizations };
-    res.redirect("http://localhost:3000")
+    res.redirect(process.env.REACT_DOMAIN)
   } catch (err) {
     console.log(err)
   }
