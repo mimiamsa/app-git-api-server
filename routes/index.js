@@ -45,14 +45,14 @@ router.get("/user/signin/callback", async (req, res) => {
         }
       })
 
-      let { data: starred } = await axios.get(`https://api.github.com/repos/${repositories[i].owner.login}/${repositories[i].name}/watchers`, {
-        headers: {
-          Authorization: accessToken, headersJSON
-        }
-      })
+      // let { data: starred } = await axios.get(`https://api.github.com/repos/${repositories[i].owner.login}/${repositories[i].name}/watchers`, {
+      //   headers: {
+      //     Authorization: accessToken, headersJSON
+      //   }
+      // })
 
-      repositories[i].totalCommits = currentRepo[0].total;
-      repositories[i].starredRepos = starred;
+      if(currentRepo[0])repositories[i].totalCommits = currentRepo[0].total;
+      // repositories[i].starredRepos = starred;
     }
 
     const { data: organizations } = await axios.get("http://api.github.com/user/orgs", { headers: { Authorization: accessToken } })
